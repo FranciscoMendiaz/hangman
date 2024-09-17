@@ -1,0 +1,20 @@
+{
+  "name": "clase-1",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start:dev": "tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./dist/src/app.js\"",
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "tsc-watch": "^6.2.0",
+    "@types/node": "^22.5.0",
+    "vitest": "^2.0.5"
+  }
+}

@@ -29,7 +29,7 @@ describe.only('class game', () => {
 
     expect(() => game.takeGuess("w")).toThrow()
 
-    expect(game.guesses).toEqual(["w"])
+    expect(game.guesses).toEqual([{letter: "w", belongsToWord: false}])
   })
 
   test("guess should subtract a life if the guess is wrong", () => {
@@ -39,4 +39,66 @@ describe.only('class game', () => {
 
     expect(game.lives).toEqual(maxLives - 1)
   })
+
+  test("guess should throw given more than one letter", () => {
+    expect(() => game.takeGuess("iw")).toThrow()
+  })
+
+  test("guess should not subtract a life if the guess has more than one letter", () => {
+    const game = new Game('Buzz')
+
+    expect(() => game.takeGuess("wi")).toThrow()
+
+    expect(game.lives).toEqual(maxLives)
+  })
+
+  test("guess should not save the string if the guess has more than one letter", () => {
+    const game = new Game('Buzz')
+
+    expect(() => game.takeGuess("wi")).toThrow()
+
+    expect(game.guesses).toEqual([])
+  })
+
+   test("guess should throw game over if all lives were substracted", () => {
+    const game = new Game('Buzz')
+
+    for (let i = 0; i < 4 ; i++) {
+      expect(() => game.takeGuess("w")).toThrow()
+    }
+
+    expect(() => game.takeGuess("w")).toThrow("Game Over")
+  })
+
+  test("guess should return a message if the guess is correct", () => {
+    expect(game.takeGuess("u")).toEqual("The letter belongs to the word")
+  })
+
+  test("guess should save the letter if the guess is correct", () => {
+    const game = new Game('Buzz')
+    
+    expect(game.takeGuess("u")).toEqual("The letter belongs to the word")
+
+    expect(game.guesses).toEqual([{letter: "u", belongsToWord: true}])
+  })
+
+  test("guess should not subtract a life if the guess is correct", () => {
+    const game = new Game('Buzz')
+    
+    expect(game.takeGuess("u")).toEqual("The letter belongs to the word")
+
+    expect(game.lives).toEqual(maxLives)
+  })
+
+  test("guess should return win if the word is accerted", () => {
+    const game = new Game('Buzz')
+    
+    game.takeGuess("B")
+    game.takeGuess("z")
+   
+    expect(game.takeGuess("u")).toEqual('Win')
+  })
+
+
+
 })

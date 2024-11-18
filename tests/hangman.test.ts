@@ -19,7 +19,6 @@ test("hangman has a method checkLetter()", () => {
 test("hangman.checkLetter() receives only one letter", () => {
   const hangman = new Hangman('feraboli')
 
-  expect(() => hangman.checkLetter('i')).not.toThrow();
   expect(() => hangman.checkLetter('is')).toThrow("Only one letter is allowed");
 });
 

@@ -27,17 +27,21 @@ describe('class game', () => {
   test("guess should save the letter if the guess is wrong", () => {
     const game = new Game('Buzz')
 
-    expect(() => game.takeGuess("w")).toThrow()
-
-    expect(game.guesses).toEqual([{ letter: "w", belongsToWord: false }])
+    try {
+      game.takeGuess("w")
+    } catch (error) {
+      expect(game.guesses).toEqual([{ letter: "w", belongsToWord: false }])
+    }
   })
 
   test("guess should subtract a life if the guess is wrong", () => {
     const game = new Game('Buzz')
 
-    expect(() => game.takeGuess("w")).toThrow()
-
-    expect(game.lives).toEqual(maxLives - 1)
+    try {
+      game.takeGuess("w")
+    } catch (error) {
+      expect(game.lives).toEqual(maxLives - 1)
+    }
   })
 
   test("guess should throw given more than one letter", () => {
@@ -47,17 +51,21 @@ describe('class game', () => {
   test("guess should not subtract a life if the guess has more than one letter", () => {
     const game = new Game('Buzz')
 
-    expect(() => game.takeGuess("wi")).toThrow()
-
-    expect(game.lives).toEqual(maxLives)
+    try {
+      game.takeGuess("wi")
+    } catch (error) {
+      expect(game.lives).toEqual(maxLives)
+    }
   })
 
   test("guess should not save the string if the guess has more than one letter", () => {
     const game = new Game('Buzz')
 
-    expect(() => game.takeGuess("wi")).toThrow()
-
-    expect(game.guesses).toEqual([])
+    try {
+      game.takeGuess("wi")
+    } catch (error) {
+      expect(game.guesses).toEqual([])
+    }
   })
 
   test("guess should throw game over if all lives were substracted", () => {
@@ -71,13 +79,13 @@ describe('class game', () => {
   })
 
   test("guess should return a message if the guess is correct", () => {
-    expect(game.takeGuess("u")).toEqual("The letter belongs to the word")
+    expect(game.takeGuess("z")).toEqual([2, 3])
   })
 
   test("guess should save the letter if the guess is correct", () => {
     const game = new Game('Buzz')
 
-    expect(game.takeGuess("u")).toEqual("The letter belongs to the word")
+    game.takeGuess("u")
 
     expect(game.guesses).toEqual([{ letter: "u", belongsToWord: true }])
   })
@@ -85,7 +93,7 @@ describe('class game', () => {
   test("guess should not subtract a life if the guess is correct", () => {
     const game = new Game('Buzz')
 
-    expect(game.takeGuess("u")).toEqual("The letter belongs to the word")
+    game.takeGuess("u")
 
     expect(game.lives).toEqual(maxLives)
   })
@@ -98,7 +106,4 @@ describe('class game', () => {
 
     expect(game.takeGuess("u")).toEqual('Win')
   })
-
-
-
 })

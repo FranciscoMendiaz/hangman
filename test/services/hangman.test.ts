@@ -13,7 +13,7 @@ test('hangman has a word', () => {
 
 test('hangman has a method checkLetter()', () => {
   const hangman = new Hangman('feraboli');
-  expect(hangman.checkLetter).toBeDefined;
+  expect(hangman.checkLetter).toBeDefined();
 });
 
 test('hangman.checkLetter() receives only one letter', () => {

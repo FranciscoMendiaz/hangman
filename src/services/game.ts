@@ -2,6 +2,10 @@ import { Hangman } from './hangman';
 
 export const maxLives = 5;
 
+export interface Guess {
+  letter: string; belongsToWord: boolean
+}
+
 export class Game {
   hangman: Hangman;
   lives: number = maxLives;
@@ -9,7 +13,7 @@ export class Game {
   // To see if player won
   correctGuesses: number = 0;
 
-  guesses: { letter: string; belongsToWord: boolean }[] = [];
+  guesses: Guess[] = [];
 
   constructor(correctWord: string) {
     this.hangman = new Hangman(correctWord);
@@ -17,7 +21,7 @@ export class Game {
 
   takeGuess(letter: string) {
     try {
-      let accerted = this.hangman.checkLetter(letter);
+      const accerted = this.hangman.checkLetter(letter);
       this.correctGuesses = this.correctGuesses + accerted.length;
       this.addCorrectGuess(letter);
       if (this.correctGuesses === this.hangman.word.length) return 'Win';

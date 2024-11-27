@@ -5,11 +5,11 @@ describe('class game', () => {
   const game = new Game('Buzz');
 
   test('game is a class', () => {
-    expect(game instanceof Game).toBeTruthy;
+    expect(game instanceof Game).toBeTruthy();
   });
 
   test('game has lives', () => {
-    expect(game.lives).toBeTruthy;
+    expect(game.lives).toBeTruthy();
   });
 
   test('game should have the letters guessed saved', () => {
@@ -29,7 +29,7 @@ describe('class game', () => {
 
     try {
       game.takeGuess('w');
-    } catch (error) {
+    } catch {
       expect(game.guesses).toEqual([{ letter: 'w', belongsToWord: false }]);
     }
   });
@@ -39,7 +39,7 @@ describe('class game', () => {
 
     try {
       game.takeGuess('w');
-    } catch (error) {
+    } catch {
       expect(game.lives).toEqual(maxLives - 1);
     }
   });
@@ -53,7 +53,7 @@ describe('class game', () => {
 
     try {
       game.takeGuess('wi');
-    } catch (error) {
+    } catch {
       expect(game.lives).toEqual(maxLives);
     }
   });
@@ -63,7 +63,7 @@ describe('class game', () => {
 
     try {
       game.takeGuess('wi');
-    } catch (error) {
+    } catch {
       expect(game.guesses).toEqual([]);
     }
   });

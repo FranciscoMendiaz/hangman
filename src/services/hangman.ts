@@ -14,7 +14,7 @@ export class Hangman {
       throw 'Letter not in the word';
     }
 
-    let array = [];
+    const array = [];
 
     for (let i = 0; i < this.word.length; i++) {
       if (this.word[i] === l) {

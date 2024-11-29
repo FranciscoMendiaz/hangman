@@ -1,4 +1,10 @@
 import { Guess } from '@src/services/game';
+import style from './styles.module.css';
+
+// interface Props {
+//   correctWord: string;
+//   guesses: Guess[];
+// }
 
 function Words({
   correctWord,
@@ -7,36 +13,28 @@ function Words({
   correctWord: string;
   guesses: Guess[];
 }) {
-  const words = [...correctWord];
+  const correctGuesses = guesses?.filter((g) => g.belongsToWord === true);
+  const correctLetters = correctGuesses?.map((g) => g.letter);
 
-  const correctGuesses = guesses.filter((g) => g.belongsToWord === true);
-  const correctLetters = new Set(correctGuesses.map((g) => g.letter));
+  return (
+    <div className={style.container}>
+      {correctWord?.split('').map((letter, index) => {
+        if (correctLetters.includes(letter)) {
+          return (
+            <p style={{ color: 'green' }} role={`letter-${index}`}>
+              {letter}
+            </p>
+          );
+        }
 
-  return words.map((letter, index) => {
-    if (correctLetters.has(letter)) {
-      return <p role={`letter-${index}`}>{letter}</p>;
-    }
-
-    return <p role={`letter-${index}`}></p>;
-  });
+        return (
+          <p style={{ color: 'green' }} role={`letter-${index}`}>
+            _
+          </p>
+        );
+      })}
+    </div>
+  );
 }
 
 export default Words;
-
-// import React from 'react';
-
-// const Word = ({ selectedWord, correctLetters }) => {
-//   return (
-//     <div className="word">
-//       {selectedWord.split('').map((letter, i) => {
-//         return (
-//           <span className="letter" key={i}>
-//             {correctLetters.includes(letter) ? letter : ''}
-//           </span>
-//         );
-//       })}
-//     </div>
-//   );
-// };
-
-// export default Word;

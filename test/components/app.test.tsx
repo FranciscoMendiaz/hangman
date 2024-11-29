@@ -9,6 +9,8 @@ import { describe, it, afterEach, expect } from 'vitest';
 import App from '../../src/App';
 import { Game } from '../../src/services/game';
 import { useState } from 'react';
+import Words from '../../src/components/words';
+import Incorrect from '../../src/components/incorrect';
 
 describe('App component', () => {
   afterEach(cleanup);
@@ -17,6 +19,10 @@ describe('App component', () => {
 
   it('should render the App component', () => {
     render(<App />);
+  });
+
+  it('should render the Words component', () => {
+    render(<Words />);
   });
 
   it('should set the game in the state', () => {
@@ -50,5 +56,24 @@ describe('App component', () => {
     const input = screen.getByRole('letter-input');
     fireEvent.change(input, { target: { value: 'a' } });
     expect(input.value).toBe('a');
+  });
+
+  it('should restart the game', () => {
+    render(<App />);
+
+    const { result } = renderHook(() => {
+      const [game] = useState(gameObj);
+      return game;
+    });
+
+    fireEvent(
+      screen.getByRole('new-game-button'),
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      })
+    );
+
+    expect(result).not.toEqual(gameObj);
   });
 });

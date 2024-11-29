@@ -3,7 +3,8 @@ import { Hangman } from './hangman';
 export const maxLives = 5;
 
 export interface Guess {
-  letter: string; belongsToWord: boolean
+  letter: string;
+  belongsToWord: boolean;
 }
 
 export class Game {

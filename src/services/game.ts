@@ -1,6 +1,6 @@
 import { Hangman } from './hangman';
 
-export const maxLives = 5;
+export const maxLives = 6;
 
 export interface Guess {
   letter: string;

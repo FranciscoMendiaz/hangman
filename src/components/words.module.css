@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.letter {
+  width: 1ch;
+  height: 1ch;
+  padding-bottom: 1ch;
+  border-bottom: 2px solid;
+  border-color: #747bff;
+}

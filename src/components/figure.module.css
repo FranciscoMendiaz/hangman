@@ -1,0 +1,13 @@
+.container {
+  fill: #242424;
+  stroke: #ffffff;
+  stroke-width: 4px;
+  stroke-linecap: round;
+}
+
+@media (prefers-color-scheme: light) {
+  .container {
+    fill: #ffffff;
+    stroke: #213547;
+  }
+}

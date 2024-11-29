@@ -18,6 +18,8 @@ describe('Incorrect component tests', () => {
 
   it('should only display the incorrect letters', () => {
     render(<Incorrect guesses={guesses} />);
-    expect(screen.getByRole('letter-0').textContent).toBe('b');
+    expect(
+      screen.getByRole('incorrect-letters-container').textContent
+    ).toContainEqual('b');
   });
 });

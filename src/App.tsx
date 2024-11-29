@@ -3,6 +3,7 @@ import { Game } from './services/game';
 import './App.css';
 import Words from './components/words';
 import Incorrect from './components/incorrect';
+import Figure from './components/figure';
 
 const possibleWords: string[] = ['holaw', 'chau', 'ferazz'];
 function getRandomInteger() {
@@ -33,25 +34,32 @@ function App() {
 
   return (
     <>
-      <h1>Ahorcado con tdd</h1>
+      <h1>Ahorcado con TDD!</h1>
+      <Figure lives={game.lives} />
       <p>Vidas restantes: {game.lives}</p>
 
-      <Words correctWord={game.hangman.word} guesses={game.guesses} />
       <Incorrect guesses={game.guesses} />
+      <Words correctWord={game.hangman.word} guesses={game.guesses} />
 
-      <input
-        role="letter-input"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        maxLength={1}
-      ></input>
+      <div className="input-letter-container">
+        <input
+          role="letter-input"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          maxLength={1}
+          placeholder="Intenta una letra"
+        ></input>
+        <button key={key} onClick={handleSubmit} role="try-button">
+          Probar
+        </button>
+      </div>
 
-      <button key={key} onClick={handleSubmit} role="try-button">
-        Probar
-      </button>
-
-      <button onClick={handleRestartGame} role="new-game-button">
-        Reiniciar juego
+      <button
+        className="try-again-button"
+        onClick={handleRestartGame}
+        role="new-game-button"
+      >
+        Volver a intentar
       </button>
     </>
   );

@@ -71,7 +71,7 @@ describe('class game', () => {
   test('guess should throw game over if all lives were substracted', () => {
     const game = new Game('Buzz');
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 5; i++) {
       expect(() => game.takeGuess('w')).toThrow();
     }
 

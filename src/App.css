@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
 }
 
@@ -43,9 +43,10 @@
 
 
 input {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 300;
-  width: auto;
+  padding-left: 10px;
+  width: 170px;
   border: 1px solid transparent;
   border-radius: 8px;
   transition: border-color 0.25s;
@@ -60,7 +61,7 @@ input:focus-visible {
 }
 
 .input-letter-container {
-  margin-top: 25px;
+  margin-top: 15px;
   display: flex;
   justify-content: center;
   gap: 10px;

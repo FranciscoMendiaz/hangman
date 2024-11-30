@@ -11,10 +11,10 @@ function Words({ correctWord, guesses }: Props) {
   const correctLetters = correctGuesses?.map((g) => g.letter);
 
   return (
-    <div className={styles.container}>
+    <div role="words-component" className={styles.container}>
       {correctWord?.split('').map((letter, index) => {
         return (
-          <h1 className={styles.letter} role={`letter-${index}`}>
+          <h1 key={index} className={styles.letter} role={`letter-${index}`}>
             {correctLetters.includes(letter) && letter}
           </h1>
         );

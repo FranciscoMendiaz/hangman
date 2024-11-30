@@ -1,6 +1,6 @@
 import { render, screen, cleanup } from '@testing-library/react';
 import { describe, it, afterEach, expect } from 'vitest';
-import Figure from '../../src/components/figure';
+import Figure from '@src/components/figure';
 
 const lives = 6;
 

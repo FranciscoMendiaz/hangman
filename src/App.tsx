@@ -1,44 +1,44 @@
-import { useEffect, useState } from 'react';
-import { Game } from './services/game';
+import { useState } from 'react';
+import { Game } from '@src/services/game';
 import './App.css';
-import Words from './components/words';
-import Incorrect from './components/incorrect';
-import Figure from './components/figure';
+import Words from '@src/components/words';
+import Incorrect from '@src/components/incorrect';
+import Figure from '@src/components/figure';
+import { getRandomWord } from './utils/generateWords';
 
-const possibleWords: string[] = ['holaw', 'chau', 'ferazz'];
-function getRandomInteger() {
-  return Math.floor(Math.random() * possibleWords.length);
-}
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { gameMessages } from './utils/messages';
 
 function App() {
-  const [key, setKey] = useState(0);
-
-  const [game, setGame] = useState<Game>(
-    new Game(possibleWords[getRandomInteger()])
-  );
+  const [game, setGame] = useState(new Game(getRandomWord()));
   const [value, setValue] = useState('');
+
+  const [key, setKey] = useState(0);
 
   const handleSubmit = () => {
     try {
-      console.log(value);
-      game.takeGuess(value);
+      const win = game.takeGuess(value);
+
+      if (win === gameMessages.win) console.log(win);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     setKey(key + 1);
+    setValue('');
   };
 
   const handleRestartGame = () => {
-    setGame(new Game(possibleWords[getRandomInteger()]));
+    setGame(new Game(getRandomWord()));
   };
 
   return (
     <>
       <h1>Ahorcado con TDD!</h1>
-      <Figure lives={game.lives} />
-      <p>Vidas restantes: {game.lives}</p>
-
       <Incorrect guesses={game.guesses} />
+      <p>Vidas restantes: {game.lives}</p>
+      <Figure lives={game.lives} />
+
       <Words correctWord={game.hangman.word} guesses={game.guesses} />
 
       <div className="input-letter-container">
@@ -61,6 +61,8 @@ function App() {
       >
         Volver a intentar
       </button>
+
+      <ToastContainer />
     </>
   );
 }

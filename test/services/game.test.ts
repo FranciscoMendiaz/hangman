@@ -1,5 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { Game, maxLives } from '../../src/services/game';
+import { guesses } from '@test/utils/test-data';
+import { gameMessages } from '@src/utils/messages';
 
 describe('class game', () => {
   const game = new Game('Buzz');
@@ -30,7 +32,7 @@ describe('class game', () => {
     try {
       game.takeGuess('w');
     } catch {
-      expect(game.guesses).toEqual([{ letter: 'w', belongsToWord: false }]);
+      expect(game.guesses).toEqual([{ letter: 'W', belongsToWord: false }]);
     }
   });
 
@@ -70,12 +72,8 @@ describe('class game', () => {
 
   test('guess should throw game over if all lives were substracted', () => {
     const game = new Game('Buzz');
-
-    for (let i = 0; i < 5; i++) {
-      expect(() => game.takeGuess('w')).toThrow();
-    }
-
-    expect(() => game.takeGuess('w')).toThrow('Game Over');
+    game.lives = 1;
+    expect(() => game.takeGuess('w')).toThrow(gameMessages.gameOver);
   });
 
   test('guess should return a message if the guess is correct', () => {
@@ -87,7 +85,7 @@ describe('class game', () => {
 
     game.takeGuess('u');
 
-    expect(game.guesses).toEqual([{ letter: 'u', belongsToWord: true }]);
+    expect(game.guesses).toEqual([{ letter: 'U', belongsToWord: true }]);
   });
 
   test('guess should not subtract a life if the guess is correct', () => {
@@ -104,6 +102,18 @@ describe('class game', () => {
     game.takeGuess('B');
     game.takeGuess('z');
 
-    expect(game.takeGuess('u')).toEqual('Win');
+    expect(game.takeGuess('u')).toEqual(gameMessages.win);
+  });
+
+  test('should not accept a correct letter already guessed', () => {
+    const game = new Game('hola');
+    game.guesses = guesses;
+    expect(() => game.takeGuess('o')).toThrow(gameMessages.alreadyGuessed);
+  });
+
+  test('should not accept an incorrect letter already guessed', () => {
+    const game = new Game('hola');
+    game.guesses = guesses;
+    expect(() => game.takeGuess('b')).toThrow(gameMessages.alreadyGuessed);
   });
 });

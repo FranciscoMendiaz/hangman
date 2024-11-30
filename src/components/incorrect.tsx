@@ -10,14 +10,7 @@ function Incorrect({ guesses }: Props) {
   const incorrectLetters = incorrectGuesses.map((g) => g.letter).join(' - ');
 
   return (
-    <div className={styles.container}>
-      {/* {incorrectLetters.map((letter, index) => {
-        return (
-          <p style={{ color: 'red' }} role={`letter-${index}`}>
-            {letter}
-          </p>
-        );
-      })} */}
+    <div role="incorrect-component" className={styles.container}>
       <h2 className="wrap">Letras incorrectas probadas: </h2>
       <h2 className="wrap" role="incorrect-letters-container">
         {incorrectLetters}

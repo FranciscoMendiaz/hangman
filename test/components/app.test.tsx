@@ -6,27 +6,22 @@ import {
   fireEvent,
 } from '@testing-library/react';
 import { describe, it, afterEach, expect } from 'vitest';
-import App from '../../src/App';
-import { Game } from '../../src/services/game';
+import App from '@src/App';
+import { Game } from '@src/services/game';
 import { useState } from 'react';
-import Words from '../../src/components/words';
-import Incorrect from '../../src/components/incorrect';
+import { getRandomWord } from '@src/utils/generateWords';
 
 describe('App component', () => {
   afterEach(cleanup);
-
-  const gameObj = new Game('df');
 
   it('should render the App component', () => {
     render(<App />);
   });
 
-  it('should render the Words component', () => {
-    render(<Words />);
-  });
-
   it('should set the game in the state', () => {
     render(<App />);
+
+    const gameObj = new Game(getRandomWord());
 
     const { result } = renderHook(() => {
       const [game] = useState(gameObj);
@@ -55,11 +50,15 @@ describe('App component', () => {
 
     const input = screen.getByRole('letter-input');
     fireEvent.change(input, { target: { value: 'a' } });
+
+    // @ts-expect-error Property 'value' does not exist on type 'HTMLElement'.
     expect(input.value).toBe('a');
   });
 
   it('should restart the game', () => {
     render(<App />);
+
+    const gameObj = new Game(getRandomWord());
 
     const { result } = renderHook(() => {
       const [game] = useState(gameObj);
@@ -74,6 +73,24 @@ describe('App component', () => {
       })
     );
 
-    expect(result).not.toEqual(gameObj);
+    expect(result).not.toEqual(new Game(getRandomWord()));
+  });
+
+  it('should render the Words component', () => {
+    render(<App />);
+
+    expect(screen.getByRole('words-component')).toBeDefined();
+  });
+
+  it('should render the Incorrect letters component', () => {
+    render(<App />);
+
+    expect(screen.getByRole('incorrect-component')).toBeDefined();
+  });
+
+  it('should render the Figure component', () => {
+    render(<App />);
+
+    expect(screen.getByRole('figure-component')).toBeDefined();
   });
 });

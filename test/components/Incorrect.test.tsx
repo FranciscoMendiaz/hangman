@@ -1,13 +1,7 @@
-import {
-  render,
-  screen,
-  cleanup,
-  renderHook,
-  fireEvent,
-} from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import { describe, it, afterEach, expect } from 'vitest';
-import Incorrect from '../../src/components/incorrect';
-import { guesses } from '../utils/test-data';
+import Incorrect from '@src/components/incorrect';
+import { guesses } from '@test/utils/test-data';
 
 describe('Incorrect component tests', () => {
   afterEach(cleanup);
@@ -20,6 +14,6 @@ describe('Incorrect component tests', () => {
     render(<Incorrect guesses={guesses} />);
     expect(
       screen.getByRole('incorrect-letters-container').textContent
-    ).toContainEqual('b');
+    ).toContainEqual('B');
   });
 });

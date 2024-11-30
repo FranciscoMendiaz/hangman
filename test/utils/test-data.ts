@@ -1,5 +1,5 @@
 export const guesses = [
-  { letter: 'a', belongsToWord: true },
-  { letter: 'b', belongsToWord: false },
-  { letter: 'o', belongsToWord: true },
+  { letter: 'A', belongsToWord: true },
+  { letter: 'B', belongsToWord: false },
+  { letter: 'O', belongsToWord: true },
 ];

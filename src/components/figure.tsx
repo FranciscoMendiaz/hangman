@@ -6,7 +6,12 @@ interface Props {
 
 function Figure({ lives }: Props) {
   return (
-    <svg height="250" width="200" className={styles.container}>
+    <svg
+      role="figure-component"
+      height="250"
+      width="200"
+      className={styles.container}
+    >
       {/* <!-- Rod --> */}
       <line x1="60" y1="20" x2="140" y2="20" />
       <line x1="140" y1="20" x2="140" y2="50" />

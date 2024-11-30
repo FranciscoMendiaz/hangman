@@ -5,10 +5,10 @@ import Words from '@src/components/words';
 import Incorrect from '@src/components/incorrect';
 import Figure from '@src/components/figure';
 import { getRandomWord } from './utils/generateWords';
-
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { gameMessages } from './utils/messages';
+
+import { Bounce, toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [game, setGame] = useState(new Game(getRandomWord()));
@@ -19,10 +19,48 @@ function App() {
   const handleSubmit = () => {
     try {
       const win = game.takeGuess(value);
-
-      if (win === gameMessages.win) console.log(win);
+      toast.dismiss();
+      if (win === gameMessages.win) {
+        toast.success(
+          `${gameMessages.win} La palabra era: ${game.hangman.word}`,
+          {
+            position: 'top-center',
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+            transition: Bounce,
+          }
+        );
+        setTimeout(() => {
+          setGame(new Game(getRandomWord()));
+        }, 2500);
+      }
     } catch (error) {
-      console.error(error);
+      toast.dismiss();
+
+      let errorMessage = error as string;
+      if (error === gameMessages.gameOver) {
+        errorMessage = `${gameMessages.gameOver} La palabra era: ${game.hangman.word}`;
+        setTimeout(() => {
+          setGame(new Game(getRandomWord()));
+        }, 2500);
+      }
+
+      toast.error(errorMessage, {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+        transition: Bounce,
+      });
     }
     setKey(key + 1);
     setValue('');

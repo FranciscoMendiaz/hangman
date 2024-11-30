@@ -9,5 +9,14 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'happy-dom',
+    coverage: {
+      exclude: [
+        'src/main.tsx',
+        'eslint.config.js',
+        'vite.config.ts',
+        'src/vite-env.d.ts',
+        'src/App.tsx',
+      ],
+    },
   },
 });

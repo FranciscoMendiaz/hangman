@@ -7,7 +7,7 @@ on:
     branches: ['main']
 
 jobs:
-  lint-format:
+  build:
     runs-on: ubuntu-latest
 
     strategy:
@@ -16,27 +16,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Run the linter and check format
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.11.0
-          cache: 'npm'
-      - run: npm run lint
-      - run: npm run format:check
-
-  unit-test:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [22.11.0]
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run unit tests
+      - name: Install dependencies
         uses: actions/setup-node@v4
         with:
           node-version: 22.11.0
           cache: 'npm'
       - run: npm ci
-      - run: npm run test
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run formatter checks
+        run: npm run format:check
+
+      - name: Run unit tests
+        run: npm run test

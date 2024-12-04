@@ -14,7 +14,12 @@ function Words({ correctWord, guesses }: Props) {
     <div role="words-component" className={styles.container}>
       {correctWord?.split('').map((letter, index) => {
         return (
-          <h1 key={index} className={styles.letter} role={`letter-${index}`}>
+          <h1
+            data-cy="letter"
+            key={index}
+            className={styles.letter}
+            role={`letter-${index}`}
+          >
             {correctLetters.includes(letter) && letter}
           </h1>
         );

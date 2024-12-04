@@ -11,7 +11,7 @@ import { Bounce, toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const [game, setGame] = useState(new Game(getRandomWord()));
+  const [game, setGame] = useState(() => new Game(getRandomWord()));
   const [value, setValue] = useState('');
 
   const [key, setKey] = useState(0);
@@ -72,10 +72,12 @@ function App() {
 
   return (
     <>
-      <h1>Ahorcado con TDD!</h1>
+      <h1 data-cy="game-title">Ahorcado con TDD!</h1>
       <Incorrect guesses={game.guesses} />
-      <p>Vidas restantes: {game.lives}</p>
+      <p data-cy="lives">Vidas restantes: {game.lives}</p>
       <Figure lives={game.lives} />
+
+      <p data-cy="correct-word">{game.hangman.word}</p>
 
       <Words correctWord={game.hangman.word} guesses={game.guesses} />
 

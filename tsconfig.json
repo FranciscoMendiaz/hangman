@@ -10,6 +10,6 @@
       "@src/*": ["src/*"],
       "@test/*": ["test/*"]
     },
-    "module": "ESNext",
+    "module": "ESNext"
   }
 }

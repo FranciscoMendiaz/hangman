@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 import { gameMessages } from '@src/utils/messages';
-import { When, Then, Given } from '@badeball/cypress-cucumber-preprocessor';
 
 const url = Cypress.config('baseUrl');
 

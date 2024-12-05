@@ -7,10 +7,7 @@ export default defineConfig({
   e2e: {
     baseUrl: 'http://localhost:5173',
     specPattern: '**/*.feature',
-    async setupNodeEvents(
-      on,
-      config
-    ) {
+    async setupNodeEvents(on, config) {
       await addCucumberPreprocessorPlugin(on, config);
       on(
         'file:preprocessor',

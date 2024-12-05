@@ -37,7 +37,3 @@
 //     }
 //   }
 // }
-
-// Cypress.Commands.add('getCorrectWord', () => {
-//   return cy.window().then((win) => win.correctWord);
-// });

@@ -32,18 +32,14 @@ jobs:
       - name: Run unit tests
         run: npm run test
 
-  build:
-    runs-on: ubuntu-latest
+      - name: Make testing build
+        run: npm run build:test
 
-    strategy:
-      matrix:
-        node-version: [22.11.0]
+      - name: Run server preview
+        run: npm run preview
 
-    steps:
-      - uses: actions/checkout@v4
-      - name: End to end tests
+      - name: Run e2e tests
         uses: cypress-io/github-action@v6
         with:
           wait-on: http://localhost:4173
-          start: npm run build:test && npm run preview
           browser: chrome

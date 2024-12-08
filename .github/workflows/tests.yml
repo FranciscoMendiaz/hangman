@@ -36,10 +36,16 @@ jobs:
         run: npm run build:test
 
       - name: Run server preview
-        run: npm run preview
+        run: |
+          npm run preview &
+          sleep 5
 
       - name: Run e2e tests
         uses: cypress-io/github-action@v6
         with:
           wait-on: http://localhost:4173
           browser: chrome
+
+      - name: Stop preview server
+        if: always()
+        run: kill $(jobs -p) || true

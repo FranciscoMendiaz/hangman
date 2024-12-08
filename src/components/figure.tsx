@@ -24,7 +24,9 @@ function Figure({ lives }: Props) {
       <line x1="20" y1="230" x2="100" y2="230" />
 
       {/* <!-- Head --> */}
-      {lives < 6 && <circle role="head" cx="140" cy="70" r="20" />}
+      {lives < 6 && (
+        <circle data-cy="head" role="head" cx="140" cy="70" r="20" />
+      )}
       {/* <!-- Body --> */}
       {lives < 5 && (
         <line role="figure-body" x1="140" y1="90" x2="140" y2="150" />

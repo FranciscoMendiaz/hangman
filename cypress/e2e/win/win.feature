@@ -1,6 +1,6 @@
-Feature: Board functionality
+Feature: Win the game
 
-  Scenario: Create a board
-    Given I am on empty home page
-    When I type and submit in the board name
-    Then I should be redirected to the board detail
+  Scenario: Win the game
+    Given The game has started with a random word
+    When I type all the correct letters of the word
+    Then I should see the win game toast

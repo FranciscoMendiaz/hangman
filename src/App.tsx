@@ -77,9 +77,11 @@ function App() {
       <p data-cy="lives">Vidas restantes: {game.lives}</p>
       <Figure lives={game.lives} />
 
-      <p data-cy="correct-word" id="correct">
-        {game.hangman.word}
-      </p>
+      {import.meta.env.VITE_ENV === 'testing' && (
+        <p data-cy="correct-word" id="correct">
+          {game.hangman.word}
+        </p>
+      )}
 
       <Words correctWord={game.hangman.word} guesses={game.guesses} />
 

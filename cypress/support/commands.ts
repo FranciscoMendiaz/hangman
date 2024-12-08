@@ -37,3 +37,11 @@
 //     }
 //   }
 // }
+
+// @ts-expect-error Argument of type '"getMissingLetters"' is not assignable to parameter of type 'keyof Chainable<any>'.
+Cypress.Commands.add('getMissingLetters', (inputArray: string[]) => {
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  const inputSet = new Set([...inputArray]);
+  const missingLetters = alphabet.filter((letter) => !inputSet.has(letter));
+  return missingLetters;
+});

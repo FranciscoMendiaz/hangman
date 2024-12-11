@@ -80,5 +80,4 @@ describe('class game', () => {
     game.guesses = guesses;
     expect(() => game.takeGuess('o')).toThrow(gameMessages.alreadyGuessed);
   });
-
 });

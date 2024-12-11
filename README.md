@@ -43,4 +43,4 @@ El archivo de workflow esta definido en `.github/workflows/tests.yml`.
 
 El proyecto utiliza Vercel para deployar la aplicación de manera tal que sea accesible para jugar por usuarios alrededor del mundo. Cada vez que se haga un push en la rama main del repositorio, Vercel renovará el deploy y analizará si continuará con la nueva versión o fallará y mantendrá la versión anterior estable.
 
-Se puede acceder al juego de forma remota y deployado [a través del siguiente link](https://hangman-agiles.vercel.app/). 
+Se puede acceder al juego de forma remota y deployado [a través del siguiente link](https://hangman-agiles.vercel.app/).

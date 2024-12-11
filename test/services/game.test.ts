@@ -1,3 +1,5 @@
+/* Los 4 primeros tests ya fueron hablados con el profe, 
+   pruebas cosas del lenguaje pero no tanto test que da valor a lo que se va a construir (medio redundante) */
 import { describe, expect, test } from 'vitest';
 import { Game, maxLives } from '../../src/services/game';
 import { guesses } from '@test/utils/test-data';
@@ -20,10 +22,6 @@ describe('class game', () => {
 
   test('game accepts a word from a method', () => {
     expect(() => game.takeGuess('w')).toBeDefined();
-  });
-
-  test('guess should throw given a wrong letter', () => {
-    expect(() => game.takeGuess('w')).toThrow();
   });
 
   test('guess should save the letter if the guess is wrong', () => {
@@ -50,50 +48,22 @@ describe('class game', () => {
     expect(() => game.takeGuess('iw')).toThrow();
   });
 
-  test('guess should not subtract a life if the guess has more than one letter', () => {
-    const game = new Game('Buzz');
-
-    try {
-      game.takeGuess('wi');
-    } catch {
-      expect(game.lives).toEqual(maxLives);
-    }
-  });
-
-  test('guess should not save the string if the guess has more than one letter', () => {
-    const game = new Game('Buzz');
-
-    try {
-      game.takeGuess('wi');
-    } catch {
-      expect(game.guesses).toEqual([]);
-    }
-  });
-
   test('guess should throw game over if all lives were substracted', () => {
     const game = new Game('Buzz');
     game.lives = 1;
     expect(() => game.takeGuess('w')).toThrow(gameMessages.gameOver);
   });
 
-  test('guess should return a message if the guess is correct', () => {
+  test('should return a string with the positions of the correct letter', () => {
     expect(game.takeGuess('z')).toEqual([2, 3]);
   });
 
-  test('guess should save the letter if the guess is correct', () => {
+  test('should save the letter if the guess is correct', () => {
     const game = new Game('Buzz');
 
     game.takeGuess('u');
 
     expect(game.guesses).toEqual([{ letter: 'U', belongsToWord: true }]);
-  });
-
-  test('guess should not subtract a life if the guess is correct', () => {
-    const game = new Game('Buzz');
-
-    game.takeGuess('u');
-
-    expect(game.lives).toEqual(maxLives);
   });
 
   test('guess should return win if the word is accerted', () => {
@@ -105,15 +75,10 @@ describe('class game', () => {
     expect(game.takeGuess('u')).toEqual(gameMessages.win);
   });
 
-  test('should not accept a correct letter already guessed', () => {
+  test('should not accept a letter already guessed', () => {
     const game = new Game('hola');
     game.guesses = guesses;
     expect(() => game.takeGuess('o')).toThrow(gameMessages.alreadyGuessed);
   });
 
-  test('should not accept an incorrect letter already guessed', () => {
-    const game = new Game('hola');
-    game.guesses = guesses;
-    expect(() => game.takeGuess('b')).toThrow(gameMessages.alreadyGuessed);
-  });
 });

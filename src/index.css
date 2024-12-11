@@ -28,6 +28,9 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
@@ -53,6 +56,29 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.info-users-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.github-users-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.github-user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.github-icon {
+  height: 25px;
+  margin-right: 5px;
 }
 
 @media (prefers-color-scheme: light) {

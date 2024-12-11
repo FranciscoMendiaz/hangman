@@ -15,7 +15,5 @@ export const getRandomWord = () => {
   const random = Math.floor(Math.random() * possibleWords.length);
   const word = possibleWords[random];
 
-  Object.assign(window, { correctWord: word });
-
-  return possibleWords[random];
+  return word;
 };

@@ -1,50 +1,46 @@
-# React + TypeScript + Vite
+# Ahorcado con TDD
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+El **Ahorcado con TDD** es una versión del clásico juego de ahorcado, pero con un enfoque en palabras y términos relacionados con metodologías ágiles. Este juego no solo es divertido, sino que también es una excelente manera de aprender y familiarizarse con el vocabulario de Agile.
 
-Currently, two official plugins are available:
+## Como instalar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Se necesita tener instalada la versión de Node.js 22.11.0 o superior para ejecutar el proyecto.
 
-## Expanding the ESLint configuration
+1. Clonar el repositorio.
+2. Ejecutar el comando `npm install` en la raíz del proyecto.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tests
 
-- Configure the top-level `parserOptions` property like this:
+### Tests unitarios de la lógica de negocio
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+Estos tests se encuentran en `test/services`.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Tests unitarios de componentes
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
+Estos tests pueden encontrarse en el directorio `test/components`.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-});
-```
+**Para correr los tests de `services` y `components` ejecutar `npm run test:gui` en la raíz del proyecto.**
+
+### Tests de aceptación
+
+Estos tests se desarrollaron con la herramienta de tests de end-to-end Cypress, y se encuentran en `cypress/e2e`. Para correrlos primero se debe ejecutar el comando `npm run build:test`, luego `npm run preview` y finalmente `npm run cy:open`. A continuación se deben seguir los siguientes pasos:
+
+1. Elegir el navegador deseado para realizar los test.
+2. Seleccionar la opción `utilizar el navegador para los e2e tests`.
+3. Seleccionar el archivo `feature` del cual se quieren ejecutar los tests.
+
+## Integracion Continua
+
+Este proyecto utiliza GitHub Actions para:
+
+- Realizar el analisis estatico de codigo con ESLint y Prettier.
+- Correr los tests unitarios de `services` y `components` con reporte de coverage.
+- Correr los tests de aceptacion en un browser chrome emulado.
+
+El archivo de workflow esta definido en `.github/workflows/tests.yml`.
+
+## Deploy en producción
+
+El proyecto utiliza Vercel para deployar la aplicación de manera tal que sea accesible para jugar por usuarios alrededor del mundo. Cada vez que se haga un push en la rama main del repositorio, Vercel renovará el deploy y analizará si continuará con la nueva versión o fallará y mantendrá la versión anterior estable.
+
+Se puede acceder al juego de forma remota y deployado [a través del siguiente link](https://hangman-agiles.vercel.app/). 

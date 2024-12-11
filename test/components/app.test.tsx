@@ -5,7 +5,7 @@ import {
   renderHook,
   fireEvent,
 } from '@testing-library/react';
-import { describe, it, afterEach, expect } from 'vitest';
+import { describe, it, afterEach, expect, vi } from 'vitest';
 import App from '@src/App';
 import { Game } from '@src/services/game';
 import { useState } from 'react';
@@ -92,5 +92,24 @@ describe('App component', () => {
     render(<App />);
 
     expect(screen.getByRole('figure-component')).toBeDefined();
+  });
+
+  it('should render the Figure component', () => {
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+
+    render(<App />);
+
+    fireEvent(
+      screen.getByRole('try-button'),
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      })
+    );
+
+    expect(logSpy).toHaveBeenCalledWith('handleSubmit called');
+
+    // Restore the original implementation of console.log
+    logSpy.mockRestore();
   });
 });

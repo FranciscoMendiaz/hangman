@@ -64,6 +64,7 @@ function App() {
     }
     setKey(key + 1);
     setValue('');
+    console.log('handleSubmit called');
   };
 
   const handleRestartGame = () => {

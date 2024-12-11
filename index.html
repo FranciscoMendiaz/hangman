@@ -5,9 +5,54 @@
     <link rel="icon" type="image/svg+xml" href="hangman.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ahorcado Ágiles TDD</title>
+    <style>
+      .delayed-content {
+        display: none;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        // Show the delayed content once the page is fully loaded
+        const delayedContent = document.querySelector('.delayed-content');
+        if (delayedContent) {
+          delayedContent.style.display = 'block';
+        }
+      };
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <footer class="delayed-content">
+      <div class="info-users-container">
+        <p>Ágiles UTN - FRRo Grupo 4 🛵</p>
+        <div class="github-users-container">
+          <div class="github-user">
+            <img class="github-icon" src="github.svg" />
+            <a href="https://github.com/fabriortenzi">fabriortenzi</a>
+          </div>
+          <div class="github-user">
+            <img class="github-icon" src="github.svg" />
+            <a href="https://github.com/FranciscoMendiaz">FranciscoMendiaz</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-users-container">
+        <p>Con la ayuda de</p>
+        <div>
+          <img loading="lazy" class="github-icon logo" src="react.svg" />
+          <img loading="lazy" class="github-icon" src="vite.svg" />
+          <img loading="lazy" class="github-icon" src="vitest.svg" />
+          <img
+            loading="lazy"
+            class="github-icon"
+            src="testing-library-logo.png"
+          />
+          <img loading="lazy" class="github-icon" src="cucumber-logo.svg" />
+          <img loading="lazy" class="github-icon" src="cypress-logo.svg" />
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

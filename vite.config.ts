@@ -12,6 +12,7 @@ export default defineConfig({
     coverage: {
       exclude: [
         'src/main.tsx',
+        'test',
         'eslint.config.js',
         'vite.config.ts',
         'src/vite-env.d.ts',

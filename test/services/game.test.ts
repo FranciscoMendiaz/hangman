@@ -72,7 +72,7 @@ describe('class game', () => {
     game.takeGuess('B');
     game.takeGuess('z');
 
-    expect(game.takeGuess('ñ')).toEqual(gameMessages.win);
+    expect(game.takeGuess('u')).toEqual(gameMessages.win);
   });
 
   test('should not accept a letter already guessed', () => {

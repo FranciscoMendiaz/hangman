@@ -73,7 +73,7 @@ function App() {
 
   return (
     <>
-      <h1 data-cy="game-title">Ahorcado con TDD!</h1>
+      <h1 data-cy="game-title">¡Ahorcado con TDD!</h1>
       <Incorrect guesses={game.guesses} />
       <p data-cy="lives">Vidas restantes: {game.lives}</p>
       <Figure lives={game.lives} />
